@@ -2,7 +2,7 @@
 
 APPNAME=${1?Error: no name given}
 
-cd ~/react-shell-tests
+cd ~/
 
 mkdir $APPNAME
 
@@ -161,12 +161,12 @@ echo '{
 
 cd ..
 
-# heroku create 
+heroku create 
 
-# heroku addons:create mongolab:sandbox
+heroku addons:create mongolab:sandbox
 
-# git add -A
+git add -A
 
-# git commit -m "Heroku Push"
+git commit -m "Heroku Push"
 
-# git push heroku master
+git push heroku master
