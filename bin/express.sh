@@ -2,7 +2,7 @@
 
 APPNAME=${1?Error: no name given}
 
-cd ../../
+cd ~/
 
 mkdir $APPNAME
 
@@ -16,7 +16,7 @@ npm i express dotenv mongoose
 
 npm install concurrently --save
 
-create-react-app client #CREATE REACT APP HERE
+create-react-app client
 
 touch server.js
 

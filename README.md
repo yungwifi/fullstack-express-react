@@ -6,7 +6,7 @@ This script builds out a basic Express sever with an endpoint at /api and a conn
 
 Name the project whatever you would like, this script takes one argument and that is your project name. If you do not include a project name the command will exit and ask you for a project name.
 
-Secondly this script will create and initialize the app wherever you are you would like. CD into the directory where you cant it and run the script.
+Secondly this script will create and initialize the app just outside of where ever you clone the repo. So you can run the command where ever you want!  
 
 Thirdly this script does require you to have a few things already set up locally. 
 1. Mongo Installed 
