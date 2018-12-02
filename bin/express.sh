@@ -2,7 +2,7 @@
 
 APPNAME=${1?Error: no name given}
 
-cd ~/
+cd ../../
 
 mkdir $APPNAME
 
