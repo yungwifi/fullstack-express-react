@@ -36,5 +36,9 @@ Run `./express.sh APPNAME` to create your full stak MERN app deployed to heroku!
 
 APPNAME is where you will name your project. 
 
+Once you're done cd into your projects directory `cd APPNAME` and run `heroku open` to test. 
+
+The `/` endpoint will be the React Spinning Logo and the `/api` endpoint will be a hello from the api index message.
+
 Hope yall have fun! 
 
