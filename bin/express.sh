@@ -1,18 +1,29 @@
 #!/bin/bash 
 
-chmod 755 client.sh
-
 cd ~/react-shell-tests
 
 mkdir appname 
 
 cd appname
 
+git init
+
 npm init -y
 
-npm install express dotenv mongoose
+npm i express dotenv mongoose
 
-touch index.js
+create-react-app client #CREATE REACT APP HERE
+
+touch server.js
+
+touch .env 
+
+touch .gitignore 
+
+echo ".env 
+/node_modules" > .gitignore
+
+echo "MONGODB_URI=mongodb://localhost/appname" > .env
 
 mkdir routes 
 
@@ -24,7 +35,7 @@ touch application.js
 
 echo "const applicationController = {
     index: (req, res) => {
-        res.send('Hey whats up this is app index')
+        res.send('Hey whats up this is the api index')
     }
 }
 
@@ -48,16 +59,112 @@ cd ..
 
 echo "require('dotenv').config();
 const express = require('express');
-const mongoose = require('mongoose');
 const app = express();
 const routes = require('./routes/index')
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use('/', routes)
+
+app.use(express.static(__dirname + '/client/build/'))
+
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/client/build/index.html')
+})
+
+app.use('/api', routes)
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log('Magic happening on port ' + PORT);
-})" > index.js 
+})" > server.js 
 
+npm install concurrently --save
+
+echo '{
+  "name": "appname",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "concurrently \"nodemon server.js\" \"cd ./client  && npm start \" ",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "cd client && npm install && npm run build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "mongoose": "^5.3.14"
+  },
+  "engines": {
+    "node": "10.13.0"
+  }
+}' > package.json 
+
+mkdir db 
+
+cd db 
+
+touch connection.js 
+
+echo "require('dotenv').config();
+const mongoose = require('mongoose')
+
+mongoose.connect(process.env.MONGODB_URI)
+
+mongoose.connection.once('open', () => {
+    console.log('Mongoose has connected to MongoDB')
+})
+
+mongoose.connection.on('error', (error) => {
+    console.error('MongoDB connection error!!! ' + error)
+    process.exit(-1)
+})
+
+module.exports = mongoose" > connection.js
+
+cd ..
+
+cd client 
+
+echo '{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "proxy": "http://localhost:3001",
+  "dependencies": {
+    "react": "^16.6.1",
+    "react-dom": "^16.6.1",
+    "react-scripts": "2.1.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}' > package.json
+
+cd ..
+
+# heroku create 
+
+# heroku addons:create mongolab:sandbox
+
+# git add -A
+
+# git commit -m "Heroku Push"
+
+# git push heroku master
