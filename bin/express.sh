@@ -1,10 +1,12 @@
 #!/bin/bash 
 
+APPNAME=${1?Error: no name given}
+
 cd ~/react-shell-tests
 
-mkdir appname 
+mkdir $APPNAME
 
-cd appname
+cd $APPNAME
 
 git init
 
@@ -25,7 +27,7 @@ touch .gitignore
 echo ".env 
 /node_modules" > .gitignore
 
-echo "MONGODB_URI=mongodb://localhost/appname" > .env
+echo "MONGODB_URI=mongodb://localhost/${APPNAME}" > .env
 
 mkdir controllers 
 
@@ -81,7 +83,7 @@ app.listen(PORT, () => {
 })" > server.js 
 
 echo '{
-  "name": "appname",
+  "name": "'$APPNAME'",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
