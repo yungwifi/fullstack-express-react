@@ -12,6 +12,8 @@ npm init -y
 
 npm i express dotenv mongoose
 
+npm install concurrently --save
+
 create-react-app client #CREATE REACT APP HERE
 
 touch server.js
@@ -24,8 +26,6 @@ echo ".env
 /node_modules" > .gitignore
 
 echo "MONGODB_URI=mongodb://localhost/appname" > .env
-
-mkdir routes 
 
 mkdir controllers 
 
@@ -42,6 +42,8 @@ echo "const applicationController = {
 module.exports = applicationController" > application.js
 
 cd ..
+
+mkdir routes 
 
 cd routes 
 
@@ -77,8 +79,6 @@ const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log('Magic happening on port ' + PORT);
 })" > server.js 
-
-npm install concurrently --save
 
 echo '{
   "name": "appname",
