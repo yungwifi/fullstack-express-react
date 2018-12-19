@@ -91,7 +91,8 @@ echo '{
     "start": "node server.js",
     "dev": "concurrently \"nodemon server.js\" \"cd ./client  && npm start \" ",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "cd client && npm install && npm run build"
+    "postinstall": "cd client && npm install && npm run build",
+    "gratitude": "Thanks Spencer Merryman for this awesome script."
   },
   "keywords": [],
   "author": "",
